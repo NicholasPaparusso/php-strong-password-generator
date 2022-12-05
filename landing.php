@@ -18,9 +18,8 @@ include './functions.php';
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/css/bootstrap.min.css' integrity='sha512-siwe/oXMhSjGCwLn+scraPOWrJxHlUgMBMZXdPe2Tnk3I0x3ESCoLz7WZ5NTH6SZrywMY+PB1cjyqJ5jAluCOg==' crossorigin='anonymous'/>
 
   <link rel="stylesheet" href="./assets/style.css">
-  
-  <title>PHP Strong Password Generator</title>
 
+  <title>Landing page</title>
 </head>
 <body class="d-flex align-items-center">
   <div class="np-container container d-flex flex-column align-items center justify-content center">
@@ -28,21 +27,14 @@ include './functions.php';
     <header>
         <h1 class="text-center py-4">PHP Strong Password Generator</h1>
     </header>
- 
-      <form class="" action="./landing.php">
 
-        <label for="pswcount">Scegli il numero di caratteri per la tua password</label>   
-        <select name="pswLen" id="pswcount">
+      <div class="output">
+        <h5>La tua password sarà:</h5>  
+        <?php echo pswGenerator($minPswLen,$_SESSION['pswLen'],$chars) ; ?>
+      </div>
 
-          <?php for($i = $minPswLen; $i <= $maxPswLen; $i++){
-            echo "<option value='$i'> $i </option>" ;
-          } ?>
-          
-        </select>
-        
-        <input class="ms-5" type="submit">
-      </form>
-
+   
+        <a class="btn w-50 btn-info mt-3" href="./index.php">Crea un'altra password</a>
 
   </div>
 </body>
