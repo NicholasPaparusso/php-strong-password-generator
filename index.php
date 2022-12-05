@@ -6,11 +6,15 @@ $minPswLen = 8 ;
 
 $maxPswLen = 32 ;
 
-$psw = substr(str_shuffle($chars), $minPswLen, $_GET['pswLen']);
+function pswGenerator($min,$max,$chararachters){
+  if(!empty($max)){
+    return substr(str_shuffle($chararachters), $min, $max);
+  }
+}
 
 $pswLen = $_GET['pswLen'];
 
-var_dump($psw)
+var_dump(pswGenerator($minPswLen,$_GET['pswLen'],$chars))
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +58,7 @@ var_dump($psw)
 
       <div class="output">
         <h5>La tua password sarà</h5>  
-        <?php echo $psw ; ?>
+        <?php echo pswGenerator($minPswLen,$_GET['pswLen'],$chars) ; ?>
       </div>
 
   </div>
