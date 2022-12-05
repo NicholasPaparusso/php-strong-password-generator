@@ -1,23 +1,42 @@
 <?php
 
-$chars= 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?&%$<>^+-*/()[]{}@#_=';
 
-$minPswLen = 8 ;
+function generatePassword($length, $listChars, $characters){
+  $psw = '';
 
-$maxPswLen = 32 ;
+  $totalLength = 0;
 
-if(!empty($_GET['pswLen'])){
+  foreach($characters as $charIndex){
 
-  session_start();
-  
-  $_SESSION['pswLen'] = $_GET['pswLen'];
-  
-  ('Location: ./landing.php');
-}
-
-function pswGenerator($min,$max,$chararachters){
-  if(!empty($max)){
-    return substr(str_shuffle($chararachters), $min, $max);
+    $totalLength += strlen($listChars[$charIndex]);
+    
   }
+
+
+  if($length > $totalLength) $length = $totalLength;
+
+
+  while(strlen($psw) < $length){
+
+    $char = getChar($listChars, $characters);
+
+
+    if($_GET['allow-duplicates'] || !str_contains($psw, $char)){
+      $psw .= $char;
+    }
+
+  }
+
+
+  return $psw;
 }
-?>
+
+
+function getChar($listChars, $characters){
+
+  $index = $characters[rand(0, count($characters) -1 )];
+
+  $charStr = $listChars[$index];
+
+  return $charStr[rand(0, strlen($charStr) - 1)];
+}
